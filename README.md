@@ -1,8 +1,6 @@
 # React Native MultiBar
 
-# live-xxx
-
-> ${DESCRIPTION}
+> This module provide functionality to implement extended actions through adding custom tab bar with advanced button.
 
 [![NPM Version][npm-image]][npm-url]
 
@@ -140,7 +138,7 @@ const TabsNavigator = createBottomTabNavigator({
 
 ## License
 
-[MIT](http://vjpr.mit-license.org)
+[ISC](http://opensource.org/licenses/ISC)
 
 [npm-image]: https://img.shields.io/npm/v/react-native-multibar.svg
 [npm-url]: https://www.npmjs.com/package/react-native-multibar
