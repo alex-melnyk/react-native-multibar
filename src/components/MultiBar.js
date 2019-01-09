@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {SafeAreaView, TouchableOpacity, View} from "react-native";
 
+import {Colors} from "../utils";
+
 const MultiBar = ({style, navigation, activeTintColor, inactiveTintColor, renderIcon, jumpTo}) => {
     const {
         index,
@@ -70,10 +72,15 @@ const MultiBar = ({style, navigation, activeTintColor, inactiveTintColor, render
 MultiBar.propTypes = {
     style: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired,
-    activeTintColor: PropTypes.string.isRequired,
-    inactiveTintColor: PropTypes.string.isRequired,
     renderIcon: PropTypes.func.isRequired,
     jumpTo: PropTypes.func.isRequired,
+    activeTintColor: PropTypes.string,
+    inactiveTintColor: PropTypes.string,
+};
+
+MultiBar.defaultProps = {
+    activeTintColor: Colors.activeTintColor,
+    inactiveTintColor: Colors.inactiveTintColor
 };
 
 const TabIcon = ({route, renderIcon, focused, activeTintColor, inactiveTintColor, onPress}) => (
@@ -99,7 +106,11 @@ TabIcon.propTypes = {
     activeTintColor: PropTypes.string.isRequired,
     inactiveTintColor: PropTypes.string.isRequired,
     focused: PropTypes.bool,
-    onPress: PropTypes.func,
+    onPress: PropTypes.func
+};
+
+TabIcon.defaultProps = {
+    focused: false
 };
 
 const Styles = {
@@ -108,7 +119,7 @@ const Styles = {
         bottom: 0,
         width: '100%',
         justifyContent: 'flex-end',
-        minHeight: 200
+        minHeight: 160
     },
     fakeBackground: {
         position: 'absolute',
