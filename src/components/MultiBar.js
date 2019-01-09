@@ -68,7 +68,12 @@ const MultiBar = ({style, navigation, activeTintColor, inactiveTintColor, render
 };
 
 MultiBar.propTypes = {
-
+    style: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
+    activeTintColor: PropTypes.string.isRequired,
+    inactiveTintColor: PropTypes.string.isRequired,
+    renderIcon: PropTypes.func.isRequired,
+    jumpTo: PropTypes.func.isRequired,
 };
 
 const TabIcon = ({route, renderIcon, focused, activeTintColor, inactiveTintColor, onPress}) => (
@@ -91,9 +96,9 @@ const TabIcon = ({route, renderIcon, focused, activeTintColor, inactiveTintColor
 TabIcon.propTypes = {
     route: PropTypes.object.isRequired,
     renderIcon: PropTypes.func.isRequired,
+    activeTintColor: PropTypes.string.isRequired,
+    inactiveTintColor: PropTypes.string.isRequired,
     focused: PropTypes.bool,
-    activeTintColor: PropTypes.string,
-    inactiveTintColor: PropTypes.string,
     onPress: PropTypes.func,
 };
 
