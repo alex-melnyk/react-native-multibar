@@ -1,6 +1,6 @@
 {
   "name": "react-native-multibar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "MultiBar is a TabBar component with an advanced button to make extra actions.",
   "main": "index.js",
   "scripts": {
