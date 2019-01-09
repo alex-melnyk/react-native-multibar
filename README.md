@@ -4,7 +4,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 
-![Preview](./PREVIEW.png?raw=true "Preview")
+![Preview](./PREVIEW_COLLAPSED.png?raw=true "Preview Collapsed") | ![Preview](./PREVIEW_EXPANDED.png?raw=true "Preview Expanded")
 
 ## Install
 
