@@ -4,6 +4,8 @@
 
 [![NPM Version][npm-image]][npm-url]
 
+Preview Collapsed | Preview Expanded
+----------------- | ----------------
 ![Preview](./PREVIEW_COLLAPSED.png?raw=true "Preview Collapsed") | ![Preview](./PREVIEW_EXPANDED.png?raw=true "Preview Expanded")
 
 ## Install
