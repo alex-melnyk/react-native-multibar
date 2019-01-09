@@ -4,6 +4,8 @@
 
 [![NPM Version][npm-image]][npm-url]
 
+![Preview](./PREVIEW.PNG?raw=true "Preview")
+
 ## Install
 
 ```bash
