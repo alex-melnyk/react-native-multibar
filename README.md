@@ -4,7 +4,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 
-![Preview](./PREVIEW.PNG?raw=true "Preview")
+![Preview](./PREVIEW.png?raw=true "Preview")
 
 ## Install
 
