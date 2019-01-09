@@ -4,11 +4,9 @@ import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View} f
 
 import {randomColor} from "../utils";
 
-// import Icon from 'react-native-vector-icons/FontAwesome';
-// import {withNavigation} from "react-navigation";
-
+const DEFAULT_ACTION_SIZE = 30;
 const DEFAULT_ANIMATION_DURATION = 300;
-const DEFAULT_NAVIGATION_TIMEOUT = 500;
+const DEFAULT_NAVIGATION_DELAY = 500;
 
 class MultiBarToggle extends Component {
     activation = new Animated.Value(0);
@@ -23,15 +21,18 @@ class MultiBarToggle extends Component {
 
         const {
             actionVibration,
-            navigationTimeout
+            navigationDelay
         } = this.props;
 
-        // OPTION: Wait to animation complete
-        setTimeout(() => this.props.navigation.navigate({
-            routeName: route.routeName
-        }), DEFAULT_NAVIGATION_TIMEOUT);
-
         actionVibration &&  Vibration.vibrate();
+
+        if (route.routeName) {
+            setTimeout(() => this.props.navigation.navigate({
+                routeName: route.routeName
+            }), navigationDelay);
+        }
+
+        route.onPress && route.onPress();
     };
 
     togglePressed = () => {
@@ -65,10 +66,10 @@ class MultiBarToggle extends Component {
 
     renderActions = () => {
         const {
-            routes
+            routes,
+            actionSize
         } = this.props;
 
-        const ACTION_SIZE = 30;
         const EXPANDING_ANGLE = 135;
         const STEP = EXPANDING_ANGLE / routes.length;
 
@@ -99,7 +100,7 @@ class MultiBarToggle extends Component {
                 <Animated.View
                     key={`action_${i}`}
                     style={[Styles.actionContainer, {
-                        marginLeft: -ACTION_SIZE / 2,
+                        marginLeft: -actionSize / 2,
                         left: activationPositionX,
                         bottom: activationPositionY,
                         transform: [
@@ -109,6 +110,9 @@ class MultiBarToggle extends Component {
                 >
                     <TouchableOpacity
                         style={[Styles.actionContent, {
+                            width: actionSize,
+                            height: actionSize,
+                            borderRadius: actionSize / 2,
                             backgroundColor: route.color,
                         }]}
                         onPress={() => this.actionPressed(route)}
@@ -174,10 +178,6 @@ class MultiBarToggle extends Component {
                         ]
                     }]}>
                         {icon}
-                        {/*<Icon*/}
-                            {/*name="plus"*/}
-                            {/*style={Styles.toggleIcon}*/}
-                        {/*/>*/}
                     </Animated.View>
                 </TouchableWithoutFeedback>
             </View>
@@ -191,6 +191,7 @@ MultiBarToggle.propTypes = {
         color: PropTypes.string,
         icon: PropTypes.node
     })),
+    actionSize: PropTypes.number,
     toggleVibration: PropTypes.bool,
     actionVibration: PropTypes.bool,
     navigationTimout: PropTypes.number,
@@ -202,7 +203,8 @@ MultiBarToggle.defaultProps = {
     routes: [...new Array(5)].map((v, i) => ({
         color: randomColor()
     })),
-    navigationTimout: DEFAULT_NAVIGATION_TIMEOUT
+    actionSize: DEFAULT_ACTION_SIZE,
+    navigationDelay: DEFAULT_NAVIGATION_DELAY
 };
 
 const Styles = {
@@ -218,7 +220,7 @@ const Styles = {
         justifyContent: 'center',
         width: 80,
         height: 80,
-        borderRadius: 50,
+        borderRadius: 40,
         backgroundColor: '#1DA2FF'
     },
     toggleIcon: {
@@ -235,10 +237,7 @@ const Styles = {
     actionContent: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        width: 30,
-        height: 30,
-        borderRadius: 15
+        justifyContent: 'center'
     }
 };
 
