@@ -182,18 +182,20 @@ class MultiBarToggle extends Component {
                 <TouchableWithoutFeedback
                     onPress={this.togglePressed}
                 >
-                    <Animated.View style={[Styles.toggleButton, {
-                        transform: [
-                            {rotate: activationRotate},
-                            {scale: activationScale}
-                        ],
-                        width: toggleSize,
-                        height: toggleSize,
-                        borderRadius: toggleSize / 2,
-                        backgroundColor: toggleColor
-                    }]}>
-                        {icon}
-                    </Animated.View>
+					<View>
+						<Animated.View style={[Styles.toggleButton, {
+							transform: [
+								{rotate: activationRotate},
+								{scale: activationScale}
+							],
+							width: toggleSize,
+							height: toggleSize,
+							borderRadius: toggleSize / 2,
+							backgroundColor: toggleColor
+						}]}>
+							{icon}
+						</Animated.View>
+					</View>
                 </TouchableWithoutFeedback>
             </View>
         );
