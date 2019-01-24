@@ -1,7 +1,3 @@
 export * from './Colors';
 
-export function randomColor() {
-    const values = [...new Array(3)].map(() => Math.random() * 256).join(',');
-
-    return `rgb(${values})`;
-}
+export const randomColor = () => `rgb(${[...new Array(3)].map(() => Math.random() * 256).join(',')})`;

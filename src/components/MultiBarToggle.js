@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View} from 'react-native';
 
-import {Colors} from "../utils";
+import {Colors} from '../utils';
 
 const DEFAULT_TOGGLE_SIZE = 80;
 const DEFAULT_ACTION_SIZE = 40;
@@ -105,6 +105,8 @@ class MultiBarToggle extends Component {
                 outputRange: [0, y]
             });
 
+            const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
             return (
                 <Animated.View
                     key={`action_${i}`}
@@ -117,7 +119,7 @@ class MultiBarToggle extends Component {
                         ]
                     }]}
                 >
-                    <TouchableOpacity
+                    <AnimatedTouchable
                         style={[Styles.actionContent, {
                             width: actionSize,
                             height: actionSize,
@@ -127,7 +129,7 @@ class MultiBarToggle extends Component {
                         onPress={() => this.actionPressed(route)}
                     >
                         {route.icon}
-                    </TouchableOpacity>
+                    </AnimatedTouchable>
                 </Animated.View>
             );
         })
@@ -181,20 +183,20 @@ class MultiBarToggle extends Component {
                         {this.renderActions()}
                     </View>
                 }
-                <AnimatedTouchable onPress={this.togglePressed} activeOpacity={1} >
-                <Animated.View style={[Styles.toggleButton, {
-                    transform: [
-                        {rotate: activationRotate},
-                        {scale: activationScale}
-                    ],
-                    width: toggleSize,
-                    height: toggleSize,
-                    borderRadius: toggleSize / 2,
-                    backgroundColor: toggleColor
-                }]}>
-                    {icon}
-                </Animated.View>
-              </AnimatedTouchable>
+                <AnimatedTouchable onPress={this.togglePressed} activeOpacity={1}>
+                    <Animated.View style={[Styles.toggleButton, {
+                        transform: [
+                            {rotate: activationRotate},
+                            {scale: activationScale}
+                        ],
+                        width: toggleSize,
+                        height: toggleSize,
+                        borderRadius: toggleSize / 2,
+                        backgroundColor: toggleColor
+                    }]}>
+                        {icon}
+                    </Animated.View>
+                </AnimatedTouchable>
             </View>
         );
     }
