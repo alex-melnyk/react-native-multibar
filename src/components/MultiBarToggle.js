@@ -168,6 +168,8 @@ class MultiBarToggle extends Component {
             outputRange: [1, 1.25, 1]
         });
 
+        const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
         return (
             <View
                 pointerEvents="box-none"
@@ -179,24 +181,20 @@ class MultiBarToggle extends Component {
                         {this.renderActions()}
                     </View>
                 }
-                <TouchableWithoutFeedback
-                    onPress={this.togglePressed}
-                >
-					<View>
-						<Animated.View style={[Styles.toggleButton, {
-							transform: [
-								{rotate: activationRotate},
-								{scale: activationScale}
-							],
-							width: toggleSize,
-							height: toggleSize,
-							borderRadius: toggleSize / 2,
-							backgroundColor: toggleColor
-						}]}>
-							{icon}
-						</Animated.View>
-					</View>
-                </TouchableWithoutFeedback>
+                <AnimatedTouchable onPress={this.togglePressed} activeOpacity={1} >
+                <Animated.View style={[Styles.toggleButton, {
+                    transform: [
+                        {rotate: activationRotate},
+                        {scale: activationScale}
+                    ],
+                    width: toggleSize,
+                    height: toggleSize,
+                    borderRadius: toggleSize / 2,
+                    backgroundColor: toggleColor
+                }]}>
+                    {icon}
+                </Animated.View>
+              </AnimatedTouchable>
             </View>
         );
     }
