@@ -45,14 +45,15 @@ class MultiBarToggle extends Component {
             toggleVibration,
             toggleAnimationDuration,
             actionAnimationDuration,
-            actionStagingDuration
+            actionStagingDuration,
+            animateIcon
         } = this.props;
 
         if (this.state.active) {
             this.setState({active: false});
 
             Animated.parallel([
-                Animated.timing(this.activation, {toValue: 0, duration: toggleAnimationDuration}),
+                animateIcon && Animated.timing(this.activation, {toValue: 0, duration: toggleAnimationDuration}),
                 Animated.stagger(actionStagingDuration, routes.map((v, i) => Animated.timing(this[`actionActivation_${(routes.length - 1) - i}`], {
                     toValue: 0,
                     duration: actionAnimationDuration
@@ -62,7 +63,7 @@ class MultiBarToggle extends Component {
             this.setState({active: true});
 
             Animated.parallel([
-                Animated.timing(this.activation, {toValue: 1, duration: toggleAnimationDuration}),
+                animateIcon && Animated.timing(this.activation, {toValue: 1, duration: toggleAnimationDuration}),
                 Animated.stagger(actionStagingDuration, routes.map((v, i) => Animated.timing(this[`actionActivation_${i}`], {
                     toValue: 1,
                     duration: actionAnimationDuration
@@ -218,8 +219,8 @@ MultiBarToggle.propTypes = {
     actionAnimationDuration: PropTypes.number,
     actionStagingDuration: PropTypes.number,
     navigationDelay: PropTypes.number,
-    icon: PropTypes.node
-
+    icon: PropTypes.node,
+    animateIcon: PropTypes.bool
 };
 
 MultiBarToggle.defaultProps = {
@@ -231,7 +232,8 @@ MultiBarToggle.defaultProps = {
     navigationDelay: DEFAULT_NAVIGATION_DELAY,
     toggleAnimationDuration: DEFAULT_TOGGLE_ANIMATION_DURATION,
     actionAnimationDuration: DEFAULT_ACTION_ANIMATION_DURATION,
-    actionStagingDuration: DEFAULT_ACTION_STAGING_DURATION
+    actionStagingDuration: DEFAULT_ACTION_STAGING_DURATION,
+    animateIcon: true
 };
 
 const Styles = {
