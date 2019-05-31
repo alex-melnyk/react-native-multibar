@@ -8,6 +8,9 @@ Preview Collapsed | Preview Expanded
 ----------------- | ----------------
 ![Preview](./PREVIEW_COLLAPSED.png?raw=true "Preview Collapsed") | ![Preview](./PREVIEW_EXPANDED.png?raw=true "Preview Expanded")
 
+## Example
+There is an example how to use the react-native-multibar [Tabber](https://github.com/alex-melnyk/Tabber)
+
 ## Install
 
 ```bash
