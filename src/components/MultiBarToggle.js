@@ -158,6 +158,7 @@ class MultiBarToggle extends Component {
         const {
             icon,
             toggleColor,
+            toggleContainerStyle,
             toggleSize
         } = this.props;
 
@@ -176,7 +177,7 @@ class MultiBarToggle extends Component {
         return (
             <View
                 pointerEvents="box-none"
-                style={Styles.container}
+                style={toggleContainerStyle}
             >
                 {
                     this.state.measured &&
@@ -202,39 +203,6 @@ class MultiBarToggle extends Component {
         );
     }
 }
-
-MultiBarToggle.propTypes = {
-    routes: PropTypes.arrayOf(PropTypes.shape({
-        routeName: PropTypes.string,
-        color: PropTypes.string,
-        icon: PropTypes.node
-    })),
-    actionSize: PropTypes.number,
-    actionVibration: PropTypes.bool,
-    actionExpandingAngle: PropTypes.number,
-    toggleVibration: PropTypes.bool,
-    toggleColor: PropTypes.string,
-    toggleSize: PropTypes.number,
-    toggleAnimationDuration: PropTypes.number,
-    actionAnimationDuration: PropTypes.number,
-    actionStagingDuration: PropTypes.number,
-    navigationDelay: PropTypes.number,
-    icon: PropTypes.node,
-    animateIcon: PropTypes.bool
-};
-
-MultiBarToggle.defaultProps = {
-    routes: [],
-    actionSize: DEFAULT_ACTION_SIZE,
-    actionExpandingAngle: DEFAULT_EXPANDING_ANGLE,
-    toggleColor: Colors.toggleColor,
-    toggleSize: DEFAULT_TOGGLE_SIZE,
-    navigationDelay: DEFAULT_NAVIGATION_DELAY,
-    toggleAnimationDuration: DEFAULT_TOGGLE_ANIMATION_DURATION,
-    actionAnimationDuration: DEFAULT_ACTION_ANIMATION_DURATION,
-    actionStagingDuration: DEFAULT_ACTION_STAGING_DURATION,
-    animateIcon: true
-};
 
 const Styles = {
     container: {
@@ -264,6 +232,41 @@ const Styles = {
         alignItems: 'center',
         justifyContent: 'center'
     }
+};
+
+MultiBarToggle.propTypes = {
+    routes: PropTypes.arrayOf(PropTypes.shape({
+        routeName: PropTypes.string,
+        color: PropTypes.string,
+        icon: PropTypes.node
+    })),
+    actionSize: PropTypes.number,
+    actionVibration: PropTypes.bool,
+    actionExpandingAngle: PropTypes.number,
+    toggleVibration: PropTypes.bool,
+    toggleContainerStyle: PropTypes.object,
+    toggleColor: PropTypes.string,
+    toggleSize: PropTypes.number,
+    toggleAnimationDuration: PropTypes.number,
+    actionAnimationDuration: PropTypes.number,
+    actionStagingDuration: PropTypes.number,
+    navigationDelay: PropTypes.number,
+    icon: PropTypes.node,
+    animateIcon: PropTypes.bool
+};
+
+MultiBarToggle.defaultProps = {
+    routes: [],
+    actionSize: DEFAULT_ACTION_SIZE,
+    actionExpandingAngle: DEFAULT_EXPANDING_ANGLE,
+    toggleContainerStyle: Styles.container,
+    toggleColor: Colors.toggleColor,
+    toggleSize: DEFAULT_TOGGLE_SIZE,
+    navigationDelay: DEFAULT_NAVIGATION_DELAY,
+    toggleAnimationDuration: DEFAULT_TOGGLE_ANIMATION_DURATION,
+    actionAnimationDuration: DEFAULT_ACTION_ANIMATION_DURATION,
+    actionStagingDuration: DEFAULT_ACTION_STAGING_DURATION,
+    animateIcon: true
 };
 
 export {MultiBarToggle};
