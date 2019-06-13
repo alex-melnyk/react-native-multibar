@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View} from 'react-native';
+import { Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View, Dimensions } from 'react-native';
 
-import {Colors} from '../utils';
+import { Colors } from '../utils';
 
 const DEFAULT_TOGGLE_SIZE = 80;
 const DEFAULT_ACTION_SIZE = 40;
@@ -11,6 +11,10 @@ const DEFAULT_ACTION_STAGING_DURATION = 100;
 const DEFAULT_ACTION_ANIMATION_DURATION = 200;
 const DEFAULT_NAVIGATION_DELAY = 500;
 const DEFAULT_EXPANDING_ANGLE = 135;
+const DEFAULT_OVERLAY_ACTIVE = false;
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 class MultiBarToggle extends Component {
     activation = new Animated.Value(0);
@@ -50,20 +54,20 @@ class MultiBarToggle extends Component {
         } = this.props;
 
         if (this.state.active) {
-            this.setState({active: false});
+            this.setState({ active: false });
 
             Animated.parallel([
-                animateIcon && Animated.timing(this.activation, {toValue: 0, duration: toggleAnimationDuration}),
+                animateIcon && Animated.timing(this.activation, { toValue: 0, duration: toggleAnimationDuration }),
                 Animated.stagger(actionStagingDuration, routes.map((v, i) => Animated.timing(this[`actionActivation_${(routes.length - 1) - i}`], {
                     toValue: 0,
                     duration: actionAnimationDuration
                 })))
             ]).start();
         } else {
-            this.setState({active: true});
+            this.setState({ active: true });
 
             Animated.parallel([
-                animateIcon && Animated.timing(this.activation, {toValue: 1, duration: toggleAnimationDuration}),
+                animateIcon && Animated.timing(this.activation, { toValue: 1, duration: toggleAnimationDuration }),
                 Animated.stagger(actionStagingDuration, routes.map((v, i) => Animated.timing(this[`actionActivation_${i}`], {
                     toValue: 1,
                     duration: actionAnimationDuration
@@ -116,7 +120,7 @@ class MultiBarToggle extends Component {
                         left: activationPositionX,
                         bottom: activationPositionY,
                         transform: [
-                            {scale: activationScale}
+                            { scale: activationScale }
                         ]
                     }]}
                 >
@@ -141,7 +145,7 @@ class MultiBarToggle extends Component {
      */
     makeActivations = (routes) => {
         routes.forEach((v, i) => this[`actionActivation_${i}`] = new Animated.Value(0));
-        this.setState({measured: true});
+        this.setState({ measured: true });
     };
 
     componentWillReceiveProps(nextProps) {
@@ -159,7 +163,8 @@ class MultiBarToggle extends Component {
             icon,
             toggleColor,
             toggleContainerStyle,
-            toggleSize
+            toggleSize,
+            overlayActive
         } = this.props;
 
         const activationRotate = this.activation.interpolate({
@@ -179,6 +184,13 @@ class MultiBarToggle extends Component {
                 pointerEvents="box-none"
                 style={toggleContainerStyle}
             >
+                {this.state.active && overlayActive ?
+                    <TouchableWithoutFeedback onPress={this.togglePressed}>
+                        <View style={Styles.overlayActive}></View>
+                    </TouchableWithoutFeedback>
+                    :
+                    null
+                }
                 {
                     this.state.measured &&
                     <View style={Styles.actionsWrapper}>
@@ -188,8 +200,8 @@ class MultiBarToggle extends Component {
                 <AnimatedTouchable onPress={this.togglePressed} activeOpacity={1}>
                     <Animated.View style={[Styles.toggleButton, {
                         transform: [
-                            {rotate: activationRotate},
-                            {scale: activationScale}
+                            { rotate: activationRotate },
+                            { scale: activationScale }
                         ],
                         width: toggleSize,
                         height: toggleSize,
@@ -231,6 +243,13 @@ const Styles = {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    overlayActive: {
+        position: 'absolute',
+        height: height * 2,
+        width: width * 2,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        bottom: '-150%'
     }
 };
 
@@ -244,6 +263,7 @@ MultiBarToggle.propTypes = {
     actionVibration: PropTypes.bool,
     actionExpandingAngle: PropTypes.number,
     toggleVibration: PropTypes.bool,
+    overlayActive: PropTypes.bool,
     toggleContainerStyle: PropTypes.object,
     toggleColor: PropTypes.string,
     toggleSize: PropTypes.number,
@@ -259,6 +279,7 @@ MultiBarToggle.defaultProps = {
     routes: [],
     actionSize: DEFAULT_ACTION_SIZE,
     actionExpandingAngle: DEFAULT_EXPANDING_ANGLE,
+    overlayActive: DEFAULT_OVERLAY_ACTIVE,
     toggleContainerStyle: Styles.container,
     toggleColor: Colors.toggleColor,
     toggleSize: DEFAULT_TOGGLE_SIZE,
@@ -269,4 +290,4 @@ MultiBarToggle.defaultProps = {
     animateIcon: true
 };
 
-export {MultiBarToggle};
+export { MultiBarToggle };
