@@ -163,7 +163,7 @@ class MultiBarToggle extends Component {
             toggleColor,
             toggleContainerStyle,
             toggleSize,
-            overlayActive
+            showOverlay
         } = this.props;
 
         const activationRotate = this.activation.interpolate({
@@ -183,13 +183,11 @@ class MultiBarToggle extends Component {
                 pointerEvents="box-none"
                 style={toggleContainerStyle}
             >
-                {this.state.active && overlayActive ?
+                {this.state.active && showOverlay && (
                     <TouchableWithoutFeedback onPress={this.togglePressed}>
                         <View style={Styles.overlayActive} />
                     </TouchableWithoutFeedback>
-                    :
-                    null
-                }
+                )}
                 {
                     this.state.measured &&
                     <View style={Styles.actionsWrapper}>
@@ -262,7 +260,7 @@ MultiBarToggle.propTypes = {
     actionVibration: PropTypes.bool,
     actionExpandingAngle: PropTypes.number,
     toggleVibration: PropTypes.bool,
-    overlayActive: PropTypes.bool,
+    showOverlay: PropTypes.bool,
     toggleContainerStyle: PropTypes.object,
     toggleColor: PropTypes.string,
     toggleSize: PropTypes.number,
@@ -278,7 +276,7 @@ MultiBarToggle.defaultProps = {
     routes: [],
     actionSize: DEFAULT_ACTION_SIZE,
     actionExpandingAngle: DEFAULT_EXPANDING_ANGLE,
-    overlayActive: DEFAULT_OVERLAY_ACTIVE,
+    showOverlay: DEFAULT_OVERLAY_ACTIVE,
     toggleContainerStyle: Styles.container,
     toggleColor: Colors.toggleColor,
     toggleSize: DEFAULT_TOGGLE_SIZE,
