@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View} from 'react-native';
+import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View, Dimensions} from 'react-native';
 
 import {Colors} from '../utils';
 
@@ -11,6 +11,9 @@ const DEFAULT_ACTION_STAGING_DURATION = 100;
 const DEFAULT_ACTION_ANIMATION_DURATION = 200;
 const DEFAULT_NAVIGATION_DELAY = 500;
 const DEFAULT_EXPANDING_ANGLE = 135;
+const DEFAULT_OVERLAY_ACTIVE = false;
+
+const { width, height } = Dimensions.get('window');
 
 class MultiBarToggle extends Component {
     activation = new Animated.Value(0);
@@ -159,7 +162,8 @@ class MultiBarToggle extends Component {
             icon,
             toggleColor,
             toggleContainerStyle,
-            toggleSize
+            toggleSize,
+            showOverlay
         } = this.props;
 
         const activationRotate = this.activation.interpolate({
@@ -179,6 +183,11 @@ class MultiBarToggle extends Component {
                 pointerEvents="box-none"
                 style={toggleContainerStyle}
             >
+                {this.state.active && showOverlay && (
+                    <TouchableWithoutFeedback onPress={this.togglePressed}>
+                        <View style={Styles.overlayActive} />
+                    </TouchableWithoutFeedback>
+                )}
                 {
                     this.state.measured &&
                     <View style={Styles.actionsWrapper}>
@@ -231,6 +240,13 @@ const Styles = {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    overlayActive: {
+        position: 'absolute',
+        height: height * 2,
+        width: width * 2,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        bottom: '-150%'
     }
 };
 
@@ -244,6 +260,7 @@ MultiBarToggle.propTypes = {
     actionVibration: PropTypes.bool,
     actionExpandingAngle: PropTypes.number,
     toggleVibration: PropTypes.bool,
+    showOverlay: PropTypes.bool,
     toggleContainerStyle: PropTypes.object,
     toggleColor: PropTypes.string,
     toggleSize: PropTypes.number,
@@ -259,6 +276,7 @@ MultiBarToggle.defaultProps = {
     routes: [],
     actionSize: DEFAULT_ACTION_SIZE,
     actionExpandingAngle: DEFAULT_EXPANDING_ANGLE,
+    showOverlay: DEFAULT_OVERLAY_ACTIVE,
     toggleContainerStyle: Styles.container,
     toggleColor: Colors.toggleColor,
     toggleSize: DEFAULT_TOGGLE_SIZE,
