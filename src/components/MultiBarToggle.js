@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View, Dimensions} from 'react-native';
+import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View, Dimensions, Text} from 'react-native';
 
 import {Colors} from '../utils';
 
@@ -115,6 +115,9 @@ class MultiBarToggle extends Component {
                 <Animated.View
                     key={`action_${i}`}
                     style={[Styles.actionContainer, {
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                         marginLeft: -actionSize / 2,
                         left: activationPositionX,
                         bottom: activationPositionY,
@@ -134,6 +137,14 @@ class MultiBarToggle extends Component {
                     >
                         {route.icon}
                     </AnimatedTouchable>
+                    {route.buttonlabel &&
+                        <Text style={[Styles.actionContent, {
+                            color: 'white',
+                            // width: actionSize,
+                            fontSize: 9,
+                            textAlign: 'center',
+                            paddingTop: 5
+                        }]}>{route.buttonlabel}</Text>}
                 </Animated.View>
             );
         })
@@ -254,7 +265,8 @@ MultiBarToggle.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.shape({
         routeName: PropTypes.string,
         color: PropTypes.string,
-        icon: PropTypes.node
+        icon: PropTypes.node,
+        buttonlabel: PropTypes.string
     })),
     actionSize: PropTypes.number,
     actionVibration: PropTypes.bool,
