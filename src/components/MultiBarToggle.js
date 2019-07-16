@@ -134,9 +134,11 @@ class MultiBarToggle extends Component {
                     >
                         {route.icon}
                     </AnimatedTouchable>
-                    {route.buttonlabel &&
-                        (<Text style={Styles.actionContentText}>{route.buttonlabel}</Text>)
-                    }
+                    {route.buttonlabel && (
+                        <Text style={[Styles.actionContent, Styles.actionContentLabel]}>
+                            {route.buttonlabel}
+                        </Text>
+                    )}
                 </Animated.View>
             );
         })
@@ -238,23 +240,19 @@ const Styles = {
     },
     actionContainer: {
         position: 'absolute',
-        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     actionContent: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
-    actionContentText: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'white',
+    actionContentLabel: {
+        paddingTop: 5,
         fontSize: 9,
         textAlign: 'center',
-        paddingTop: 5
+        color: 'white'
     },
     overlayActive: {
         position: 'absolute',
