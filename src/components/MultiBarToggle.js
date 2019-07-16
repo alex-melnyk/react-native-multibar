@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View, Dimensions, Text} from 'react-native';
+import {Animated, Dimensions, Text, TouchableOpacity, TouchableWithoutFeedback, Vibration, View} from 'react-native';
 
 import {Colors} from '../utils';
 
