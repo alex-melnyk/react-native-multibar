@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View, Dimensions} from 'react-native';
+import {Animated, Dimensions, Text, TouchableOpacity, TouchableWithoutFeedback, Vibration, View} from 'react-native';
 
 import {Colors} from '../utils';
 
@@ -13,7 +13,7 @@ const DEFAULT_NAVIGATION_DELAY = 500;
 const DEFAULT_EXPANDING_ANGLE = 135;
 const DEFAULT_OVERLAY_ACTIVE = false;
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 class MultiBarToggle extends Component {
     activation = new Animated.Value(0);
@@ -128,15 +128,20 @@ class MultiBarToggle extends Component {
                             width: actionSize,
                             height: actionSize,
                             borderRadius: actionSize / 2,
-                            backgroundColor: route.color,
+                            backgroundColor: route.color
                         }]}
                         onPress={() => this.actionPressed(route)}
                     >
                         {route.icon}
                     </AnimatedTouchable>
+                    {route.buttonlabel && (
+                        <Text style={[Styles.actionContent, Styles.actionContentLabel]}>
+                            {route.buttonlabel}
+                        </Text>
+                    )}
                 </Animated.View>
             );
-        })
+        });
     };
 
     /**
@@ -166,6 +171,11 @@ class MultiBarToggle extends Component {
             showOverlay
         } = this.props;
 
+        const {
+            active,
+            measured
+        } = this.state;
+
         const activationRotate = this.activation.interpolate({
             inputRange: [0, 1],
             outputRange: ['0deg', '135deg']
@@ -183,18 +193,20 @@ class MultiBarToggle extends Component {
                 pointerEvents="box-none"
                 style={toggleContainerStyle}
             >
-                {this.state.active && showOverlay && (
+                {active && showOverlay && (
                     <TouchableWithoutFeedback onPress={this.togglePressed}>
-                        <View style={Styles.overlayActive} />
+                        <View style={Styles.overlayActive}/>
                     </TouchableWithoutFeedback>
                 )}
-                {
-                    this.state.measured &&
+                {measured && (
                     <View style={Styles.actionsWrapper}>
                         {this.renderActions()}
                     </View>
-                }
-                <AnimatedTouchable onPress={this.togglePressed} activeOpacity={1}>
+                )}
+                <AnimatedTouchable
+                    activeOpacity={1}
+                    onPress={this.togglePressed}
+                >
                     <Animated.View style={[Styles.toggleButton, {
                         transform: [
                             {rotate: activationRotate},
@@ -234,12 +246,20 @@ const Styles = {
         bottom: 0
     },
     actionContainer: {
-        position: 'absolute'
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     actionContent: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    actionContentLabel: {
+        paddingTop: 5,
+        fontSize: 9,
+        textAlign: 'center',
+        color: 'white'
     },
     overlayActive: {
         position: 'absolute',
@@ -254,7 +274,8 @@ MultiBarToggle.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.shape({
         routeName: PropTypes.string,
         color: PropTypes.string,
-        icon: PropTypes.node
+        icon: PropTypes.node,
+        buttonlabel: PropTypes.string
     })),
     actionSize: PropTypes.number,
     actionVibration: PropTypes.bool,
