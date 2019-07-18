@@ -13,7 +13,7 @@ const DEFAULT_NAVIGATION_DELAY = 500;
 const DEFAULT_EXPANDING_ANGLE = 135;
 const DEFAULT_OVERLAY_ACTIVE = false;
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 class MultiBarToggle extends Component {
     activation = new Animated.Value(0);
@@ -128,7 +128,7 @@ class MultiBarToggle extends Component {
                             width: actionSize,
                             height: actionSize,
                             borderRadius: actionSize / 2,
-                            backgroundColor: route.color,
+                            backgroundColor: route.color
                         }]}
                         onPress={() => this.actionPressed(route)}
                     >
@@ -141,7 +141,7 @@ class MultiBarToggle extends Component {
                     )}
                 </Animated.View>
             );
-        })
+        });
     };
 
     /**
@@ -171,6 +171,11 @@ class MultiBarToggle extends Component {
             showOverlay
         } = this.props;
 
+        const {
+            active,
+            measured
+        } = this.state;
+
         const activationRotate = this.activation.interpolate({
             inputRange: [0, 1],
             outputRange: ['0deg', '135deg']
@@ -188,18 +193,20 @@ class MultiBarToggle extends Component {
                 pointerEvents="box-none"
                 style={toggleContainerStyle}
             >
-                {this.state.active && showOverlay && (
+                {active && showOverlay && (
                     <TouchableWithoutFeedback onPress={this.togglePressed}>
-                        <View style={Styles.overlayActive} />
+                        <View style={Styles.overlayActive}/>
                     </TouchableWithoutFeedback>
                 )}
-                {
-                    this.state.measured &&
+                {measured && (
                     <View style={Styles.actionsWrapper}>
                         {this.renderActions()}
                     </View>
-                }
-                <AnimatedTouchable onPress={this.togglePressed} activeOpacity={1}>
+                )}
+                <AnimatedTouchable
+                    activeOpacity={1}
+                    onPress={this.togglePressed}
+                >
                     <Animated.View style={[Styles.toggleButton, {
                         transform: [
                             {rotate: activationRotate},
