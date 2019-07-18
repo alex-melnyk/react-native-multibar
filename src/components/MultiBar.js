@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import {SafeAreaView, TouchableOpacity, View, Text} from 'react-native';
 
 import {Colors} from '../utils';
 
@@ -97,6 +97,9 @@ const TabIcon = ({route, renderIcon, focused, activeTintColor, inactiveTintColor
                     : inactiveTintColor
             })
         }
+        {route.params && (
+            <Text style={[Styles.labelStyle, {color: focused ? activeTintColor : inactiveTintColor}]}>{route.params.label}</Text>
+        )}
     </TouchableOpacity>
 );
 
@@ -131,10 +134,16 @@ const Styles = {
         alignItems: 'flex-end'
     },
     tabStyle: {
+        flex: 1,
         height: 50,
         width: 50,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    labelStyle: {
+        fontSize: 11,
+        marginBottom: 1,
+        marginTop: 1.5,
     }
 };
 
