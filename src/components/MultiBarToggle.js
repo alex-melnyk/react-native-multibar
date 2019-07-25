@@ -84,6 +84,10 @@ class MultiBarToggle extends Component {
             actionExpandingAngle
         } = this.props;
 
+        const {
+            active
+        } = this.state;
+
         const STEP = actionExpandingAngle / routes.length;
 
         return routes.map((route, i) => {
@@ -134,7 +138,7 @@ class MultiBarToggle extends Component {
                     >
                         {route.icon}
                     </AnimatedTouchable>
-                    {route.buttonlabel && (
+                    {route.buttonlabel && active && (
                         <Text style={[Styles.actionContent, Styles.actionContentLabel]}>
                             {route.buttonlabel}
                         </Text>
