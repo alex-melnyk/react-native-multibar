@@ -35,7 +35,8 @@ class MultiBarToggle extends Component {
 
         if (route.routeName) {
             setTimeout(() => this.props.navigation.navigate({
-                routeName: route.routeName
+                routeName: route.routeName,
+                params: route.params
             }), navigationDelay);
         }
 
@@ -83,6 +84,10 @@ class MultiBarToggle extends Component {
             actionSize,
             actionExpandingAngle
         } = this.props;
+
+        const {
+            active
+        } = this.state;
 
         const STEP = actionExpandingAngle / routes.length;
 
@@ -134,7 +139,7 @@ class MultiBarToggle extends Component {
                     >
                         {route.icon}
                     </AnimatedTouchable>
-                    {route.buttonlabel && (
+                    {route.buttonlabel && active && (
                         <Text style={[Styles.actionContent, Styles.actionContentLabel]}>
                             {route.buttonlabel}
                         </Text>
@@ -275,7 +280,8 @@ MultiBarToggle.propTypes = {
         routeName: PropTypes.string,
         color: PropTypes.string,
         icon: PropTypes.node,
-        buttonlabel: PropTypes.string
+        buttonlabel: PropTypes.string,
+        params: PropTypes.object
     })),
     actionSize: PropTypes.number,
     actionVibration: PropTypes.bool,
