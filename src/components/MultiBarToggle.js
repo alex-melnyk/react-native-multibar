@@ -35,7 +35,8 @@ class MultiBarToggle extends Component {
 
         if (route.routeName) {
             setTimeout(() => this.props.navigation.navigate({
-                routeName: route.routeName
+                routeName: route.routeName,
+                params: route.params
             }), navigationDelay);
         }
 
@@ -279,7 +280,8 @@ MultiBarToggle.propTypes = {
         routeName: PropTypes.string,
         color: PropTypes.string,
         icon: PropTypes.node,
-        buttonlabel: PropTypes.string
+        buttonlabel: PropTypes.string,
+        params: PropTypes.object
     })),
     actionSize: PropTypes.number,
     actionVibration: PropTypes.bool,
