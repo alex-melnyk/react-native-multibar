@@ -22,10 +22,15 @@
     "url": "https://github.com/alex-melnyk/react-native-multibar/issues"
   },
   "homepage": "https://github.com/alex-melnyk/react-native-multibar#readme",
-  "peerDependencies": {
+  "dependencies": {
+    "@types/react-navigation": "^3.4.0",
     "babel-preset-react-native": "^4.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-native": "^0.60.4"
+    "react-native": "^0.60.4",
+    "react-navigation": "^4.0.10"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.60.30"
   }
 }

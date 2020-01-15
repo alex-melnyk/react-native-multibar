@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 
 import { Colors } from '../utils';
 import { TabIcon } from './TabIcon';
