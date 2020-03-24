@@ -1,14 +1,14 @@
 {
-  "name": "react-native-multibar",
-  "version": "0.0.12",
-  "description": "MultiBar is a TabBar component with an advanced button to make extra actions.",
+  "name": "react-native-multibar-mrousavy",
+  "version": "0.0.13",
+  "description": "MultiBar is a TabBar component with an advanced button to make extra actions. (mrousavy fork)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alex-melnyk/react-native-multibar.git"
+    "url": "git+https://github.com/mrousavy/react-native-multibar.git"
   },
   "keywords": [
     "React",
@@ -16,12 +16,15 @@
     "Navigation",
     "TabBar"
   ],
-  "author": "Alex Melnyk",
+  "authors": [
+    "Alex Melnyk",
+    "Marc Rousavy"
+  ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alex-melnyk/react-native-multibar/issues"
+    "url": "https://github.com/mrousavy/react-native-multibar/issues"
   },
-  "homepage": "https://github.com/alex-melnyk/react-native-multibar#readme",
+  "homepage": "https://github.com/mrousavy/react-native-multibar#readme",
   "peerDependencies": {
     "babel-preset-react-native": "^4.0.1",
     "prop-types": "^15.7.2",
