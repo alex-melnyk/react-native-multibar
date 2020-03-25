@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, Dimensions, Text, TouchableOpacity, TouchableWithoutFeedback, Vibration, View } from 'react-native';
+import { Animated, Text, TouchableOpacity, TouchableWithoutFeedback, Vibration, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Colors } from '../utils';
@@ -38,7 +38,7 @@ class MultiBarToggle extends Component {
 
     if (route.routeName) {
       setTimeout(() => this.props.navigation.navigate({
-        routeName: route.routeName,
+        name: route.routeName,
         params: route.params
       }), navigationDelay);
     }
