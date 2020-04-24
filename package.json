@@ -2,9 +2,10 @@
   "name": "react-native-multibar",
   "version": "0.0.13",
   "description": "MultiBar is a TabBar component with an advanced button to make extra actions.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc *.ts"
   },
   "repository": {
     "type": "git",
@@ -14,7 +15,8 @@
     "React",
     "Native",
     "Navigation",
-    "TabBar"
+    "TabBar",
+    "MultiBar"
   ],
   "author": "Alex Melnyk",
   "license": "ISC",
@@ -22,9 +24,16 @@
     "url": "https://github.com/alex-melnyk/react-native-multibar/issues"
   },
   "homepage": "https://github.com/alex-melnyk/react-native-multibar#readme",
-  "peerDependencies": {
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@types/react": "~16.9.23",
+    "@types/react-native": "~0.61.17",
+    "typescript": "~3.8.3"
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^5.2.7",
+    "@react-navigation/native": "^5.1.6",
     "babel-preset-react-native": "^4.0.1",
-    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-native": "^0.60.4"
   }
