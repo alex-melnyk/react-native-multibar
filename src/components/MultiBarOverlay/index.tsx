@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import * as React from 'react';
 import { Animated } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
@@ -16,15 +16,15 @@ export const MultiBarOverlay: React.FC<BottomTabBarProps> = ({
     iconSize,
     overlayRadius,
     setExtrasVisible
-  } = useContext(MultiBarContext);
+  } = React.useContext(MultiBarContext);
 
-  const iconSizeHalf = useMemo(() => iconSize / 2, [iconSize]);
-  const surfaceSize = useMemo(() => (overlayRadius * 2) + iconSize, [iconSize, overlayRadius]);
-  const surfaceSizeHalf = useMemo(() => surfaceSize / 2, [surfaceSize]);
-  const angleStep = useMemo(() => COMMON_DEGREES / data.length, [data]);
-  const animations = useMemo(() => data.map(() => new Animated.Value(extrasVisible ? 1 : 0)), [data]);
+  const iconSizeHalf = React.useMemo(() => iconSize / 2, [iconSize]);
+  const surfaceSize = React.useMemo(() => (overlayRadius * 2) + iconSize, [iconSize, overlayRadius]);
+  const surfaceSizeHalf = React.useMemo(() => surfaceSize / 2, [surfaceSize]);
+  const angleStep = React.useMemo(() => COMMON_DEGREES / data.length, [data]);
+  const animations = React.useMemo(() => data.map(() => new Animated.Value(extrasVisible ? 1 : 0)), [data]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // TODO: Implement animation switch.
     const animate = Animated.spring || Animated.timing;
 
@@ -36,7 +36,7 @@ export const MultiBarOverlay: React.FC<BottomTabBarProps> = ({
     Animated.parallel(animationsList).start();
   }, [extrasVisible]);
 
-  const itemsList = useMemo(() => data.map((extrasRender, idx) => {
+  const itemsList = React.useMemo(() => data.map((extrasRender, idx) => {
     const handleTouchEnd = () => {
       setExtrasVisible(false);
     };

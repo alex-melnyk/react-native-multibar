@@ -1,8 +1,9 @@
 {
   "name": "react-native-multibar",
-  "version": "0.0.13",
+  "version": "1.0.0",
   "description": "MultiBar is a TabBar component with an advanced button to make extra actions.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc *.ts"
@@ -28,13 +29,16 @@
     "@babel/core": "^7.8.6",
     "@types/react": "~16.9.23",
     "@types/react-native": "~0.61.17",
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "babel-preset-react-native": "^4.0.1"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/bottom-tabs": "^5.2.7",
     "@react-navigation/native": "^5.1.6",
-    "babel-preset-react-native": "^4.0.1",
-    "react": "^16.8.6",
+    "react-native-screens": "~2.2.0",
+    "react-native-safe-area-context": "0.7.3",
+    "react": "~16.9.0",
     "react-native": "^0.60.4"
   }
 }

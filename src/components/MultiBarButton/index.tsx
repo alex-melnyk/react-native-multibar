@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import * as React from 'react';
 import { Animated, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { MultiBarContext } from '../../context';
@@ -14,16 +14,16 @@ export const MultiBarButton: React.FC<Props> = ({
   style,
   onPress
 }) => {
-  const { extrasVisible, setExtrasVisible } = useContext(MultiBarContext);
-  const animated = useRef<Animated.Value>(new Animated.Value(0)).current;
+  const { extrasVisible, setExtrasVisible } = React.useContext(MultiBarContext);
+  const animated = React.useRef<Animated.Value>(new Animated.Value(0)).current;
 
-  useEffect(() => {
+  React.useEffect(() => {
     Animated.spring(animated, {
       toValue: extrasVisible ? 1 : 0
     }).start();
   }, [extrasVisible]);
 
-  const handlePress = useCallback(() => {
+  const handlePress = React.useCallback(() => {
     if (!onPress || !onPress()) {
       setExtrasVisible(!extrasVisible);
     }

@@ -4,9 +4,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 
-Preview Collapsed | Preview Expanded
------------------ | ----------------
-![Preview](./PREVIEW_COLLAPSED.png?raw=true "Preview Collapsed") | ![Preview](./PREVIEW_EXPANDED.png?raw=true "Preview Expanded")
+![Preview](./PREVIEW.gif?raw=true "Preview")
 
 ## Example
 There is an example how to use the react-native-multibar [Tabber Expo](https://github.com/alex-melnyk/tabber-expo) or [Tabber RN](https://github.com/alex-melnyk/Tabber)
@@ -14,133 +12,165 @@ There is an example how to use the react-native-multibar [Tabber Expo](https://g
 ## Install
 
 ```bash
-npm i react-native-multibar
+yarn add react-native-multibar
 ```
 or
 ```bash
-yarn add react-native-multibar
+npm i react-native-multibar
 ```
 
 ## Usage
 
 ```javascript
-const TabsNavigator = createBottomTabNavigator({
-    [Routes.TabsBookmarks]: {
-        screen: Bookmarks,
-        navigationOptions: () => ({
-            tabBarIcon: ({tintColor}) => (
-                <Icon
-                    name="bookmark"
-                    color={tintColor}
-                    size={24}
-                />
-            )
-        })
-    },
-    [Routes.TabsLikes]: {
-        screen: Likes,
-        navigationOptions: () => ({
-            tabBarIcon: ({tintColor}) => (
-                <Icon
-                    name="heart"
-                    color={tintColor}
-                    size={24}
-                />
-            )
-        })
-    },
-    MultiBar: {
-        screen: () => null,
-        navigationOptions: ({navigation}) => ({
-            tabBarIcon: () => (
-                <MultiBarToggle
-                    navigation={navigation}
-                    actionSize={30}
-                    routes={[
-                        {
-                            routeName: Routes.OtherScreen,
-                            color: '#FF8360',
-                            icon: (
-                                <Icon
-                                    name="rocket"
-                                    color="#333333"
-                                    size={15}
-                                />
-                            )
-                        },
-                        {
-                            routeName: Routes.OtherScreen,
-                            color: '#E8E288',
-                            icon: (
-                                <Icon
-                                    name="dashboard"
-                                    color="#333333"
-                                    size={15}
-                                />
-                            )
-                        },
-                        {
-                            routeName: Routes.OtherScreen,
-                            color: '#7DCE82',
-                            icon: (
-                                <Icon
-                                    name="gears"
-                                    color="#333333"
-                                    size={15}
-                                />
-                            )
-                        },
-                    ]}
-                    icon={(
-                        <Icon
-                            name="plus"
-                            color="#FFFFFF"
-                            size={24}
-                        />
-                    )}
-                />
-            )
-        }),
-        params: {
-            navigationDisabled: true
-        }
-    },
-    [Routes.TabsPrivate]: {
-        screen: Private,
-        navigationOptions: () => ({
-            tabBarIcon: ({tintColor}) => (
-                <Icon
-                    name="lock"
-                    color={tintColor}
-                    size={24}
-                />
-            )
-        })
-    },
-    [Routes.TabsProfile]: {
-        screen: Profile,
-        navigationOptions: () => ({
-            tabBarIcon: ({tintColor}) => (
-                <Icon
-                    name="user"
-                    color={tintColor}
-                    size={24}
-                />
-            )
-        })
-    }
-}, {
-    tabBarComponent: MultiBar,
-    tabBarOptions: {
-        showLabel: false,
-        activeTintColor: '#F8F8F8',
-        inactiveTintColor: '#586589',
-        style: {
-            backgroundColor: '#171F33'
-        },
-        tabStyle: {}
-    }
-});
+<MultiBarProvider
+    data={[
+      ({ navigation }) => (
+        <TouchIcon
+          name="chevron-left"
+          color="#E24E1B"
+          size={20}
+          onPress={() => {
+            if (navigation.canGoBack()) {
+              navigation.goBack();
+            }
+          }}
+        />
+      ),
+      ({ navigation }) => (
+        <TouchIcon
+          name="flag"
+          color="#E24E1B"
+          size={20}
+          onPress={() => {
+          }}
+        />
+      ),
+      ({ navigation }) => (
+        <TouchIcon
+          name="headphones"
+          color="#E24E1B"
+          size={20}
+          onPress={() => {
+          }}
+        />
+      ),
+      ({ navigation }) => (
+        <TouchIcon
+          name="heart"
+          color="#E24E1B"
+          size={20}
+          onPress={() => {
+          }}
+        />
+      ),
+      ({ navigation }) => (
+        <TouchIcon
+          name="star"
+          color="#E24E1B"
+          size={20}
+          onPress={() => {
+          }}
+        />
+      ),
+      ({ navigation }) => (
+        <TouchIcon
+          name="music"
+          color="#E24E1B"
+          size={20}
+          onPress={() => {
+          }}
+        />
+      ),
+    ]}
+    iconSize={40}
+    overlayRadius={100}
+    initialExtrasVisible={false}
+    >
+    <Tab.Navigator tabBar={BottomTabBarWrapper}>
+      <Tab.Screen
+        name="Home"
+        component={BlankScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons
+              name="home"
+              style={{
+                fontSize: size,
+                color: color
+              }}
+            />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Likes"
+        component={BlankScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons
+              name="star"
+              style={{
+                fontSize: size,
+                color: color
+              }}
+            />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Center"
+        component={BlankScreen}
+        options={{
+          tabBarLabel: '',
+          tabBarButton: () => (
+            <MultiBarButton
+              style={{
+                backgroundColor: '#E24E1B'
+              }}
+            >
+              <MaterialIcons
+                name="add"
+                style={{
+                  fontSize: 32,
+                  color: '#EDF2F4'
+                }}
+              />
+            </MultiBarButton>
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Posts"
+        component={BlankScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons
+              name="message"
+              style={{
+                fontSize: size,
+                color: color
+              }}
+            />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={BlankScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons
+              name="settings"
+              style={{
+                fontSize: size,
+                color: color
+              }}
+            />
+          )
+        }}
+      />
+    </Tab.Navigator>
+</MultiBarProvider>
 ```
 
 ## License

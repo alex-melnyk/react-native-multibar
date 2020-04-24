@@ -12,10 +12,9 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
-    "esModuleInterop": false,
-    "types": [
-      "jest"
-    ]
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "declaration": true
   },
   "include": [
     "src/**/*"
