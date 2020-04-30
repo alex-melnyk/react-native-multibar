@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 type MultiBarExtrasRender = (props: {
-  navigation: any;
+  navigation?: any;
 }) => React.ReactNode;
 
 export type MultiBarContextProps = {

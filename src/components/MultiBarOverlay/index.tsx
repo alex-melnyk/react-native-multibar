@@ -7,7 +7,7 @@ import { styles } from './Styles';
 const COMMON_DEGREES = 180;
 
 type Props = {
-  navigation: any;
+  navigation?: any;
 };
 
 export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {

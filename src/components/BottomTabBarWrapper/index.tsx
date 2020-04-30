@@ -1,18 +1,24 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { BottomTabBar, BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 import { MultiBarOverlay } from '../MultiBarOverlay';
 import { styles } from './Styles';
 
-export const BottomTabBarWrapper: React.FC<BottomTabBarProps> = (props) => (
+type Props = {
+  navigation?: any;
+}
+
+export const BottomTabBarWrapper: React.FC<Props> = ({
+  children,
+  navigation
+}) => (
   <View
     pointerEvents="box-none"
     style={styles.container}
   >
     <MultiBarOverlay
-      {...props}
+      navigation={navigation}
     />
-    <BottomTabBar {...props}/>
+    {children}
   </View>
 );
