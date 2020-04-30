@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 import { MultiBarContext } from '../../context';
 import { styles } from './Styles';
 
 const COMMON_DEGREES = 180;
 
-export const MultiBarOverlay: React.FC<BottomTabBarProps> = ({
-  navigation
-}) => {
+type Props = {
+  navigation: any;
+};
+
+export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
   const {
     data,
     extrasVisible,

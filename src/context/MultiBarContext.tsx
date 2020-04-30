@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { NavigationHelpers, ParamListBase } from '@react-navigation/native';
-import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 
 type MultiBarExtrasRender = (props: {
-  navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>
+  navigation: any;
 }) => React.ReactNode;
 
 export type MultiBarContextProps = {
