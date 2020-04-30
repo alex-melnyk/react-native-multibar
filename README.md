@@ -1,6 +1,6 @@
 # React Native MultiBar
 
-> This module provide functionality to implement extended actions through adding custom tab bar with advanced button.
+> This module provides the functionality to implement extended actions by adding a custom tab bar with an advanced button.
 
 [![NPM Version][npm-image]][npm-url]
 
