@@ -31,7 +31,8 @@ export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
 
     const animationsList = animations.map((anim, idx) => animate(anim, {
       toValue: extrasVisible ? 1 : 0,
-      delay: idx * 150
+      delay: idx * 150,
+      useNativeDriver: true
     }));
 
     Animated.parallel(animationsList).start();
