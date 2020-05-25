@@ -18,20 +18,23 @@ export const MultiBarButton: React.FC<Props> = ({
   const animated = React.useRef<Animated.Value>(new Animated.Value(0)).current;
 
   React.useEffect(() => {
-    Animated.spring(animated, {
+    const animation = Animated.spring(animated, {
       toValue: extrasVisible ? 1 : 0,
       useNativeDriver: false
-    }).start();
+    });
+
+    animation.start();
+
+    return () => animation.stop();
   }, [extrasVisible]);
 
   const handlePress = React.useCallback(() => {
     if (!onPress || !onPress()) {
       setExtrasVisible(!extrasVisible);
     }
-
   }, [extrasVisible]);
 
-  const rotation = animated.interpolate({
+  const rotateZ = animated.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '180deg']
   });
@@ -44,9 +47,7 @@ export const MultiBarButton: React.FC<Props> = ({
       <Animated.View
         style={[styles.contentContainer, {
           transform: [
-            {
-              rotateZ: rotation
-            }
+            { rotateZ }
           ]
         }, style]}
       >

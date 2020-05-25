@@ -1,8 +1,10 @@
 import * as React from 'react';
 
-type MultiBarExtrasRender = (props: {
-  navigation?: any;
-}) => React.ReactNode;
+export type MultiBarPassThroughParams = {
+  params?: any;
+};
+
+export type MultiBarExtrasRender = (props: MultiBarPassThroughParams) => React.ReactNode;
 
 export type MultiBarContextProps = {
   data: MultiBarExtrasRender[];

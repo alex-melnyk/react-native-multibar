@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { MultiBarContext } from '../../context';
+import { MultiBarContext, MultiBarPassThroughParams } from '../../context';
 import { styles } from './Styles';
 
 const COMMON_DEGREES = 180;
 
-type Props = {
-  navigation?: any;
-};
+type Props = Pick<MultiBarPassThroughParams, 'params'>;
 
-export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
+export const MultiBarOverlay: React.FC<Props> = ({ params }) => {
   const {
     data,
     extrasVisible,
@@ -24,9 +22,11 @@ export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
   const surfaceSizeHalf = React.useMemo(() => surfaceSize / 2, [surfaceSize]);
   const angleStep = React.useMemo(() => COMMON_DEGREES / data.length, [data]);
   const animations = React.useMemo(() => data.map(() => new Animated.Value(extrasVisible ? 1 : 0)), [data]);
+  const overlayHeight = React.useMemo(() => {
+    return surfaceSizeHalf * (surfaceSize / overlayRadius / 2);
+  }, [surfaceSizeHalf, surfaceSize, overlayRadius]);
 
   React.useEffect(() => {
-    // TODO: Implement animation switch.
     const animate = Animated.spring || Animated.timing;
 
     const animationsList = animations.map((anim, idx) => animate(anim, {
@@ -35,7 +35,11 @@ export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
       useNativeDriver: false
     }));
 
-    Animated.parallel(animationsList).start();
+    const animation = Animated.parallel(animationsList);
+
+    animation.start();
+
+    return () => animation.stop();
   }, [extrasVisible]);
 
   const itemsList = React.useMemo(() => data.map((extrasRender, idx) => {
@@ -58,7 +62,7 @@ export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
       outputRange: [surfaceSize, y]
     });
 
-    const rotation = animations[idx].interpolate({
+    const rotateZ = animations[idx].interpolate({
       inputRange: [0, 1],
       outputRange: [90, 0]
     });
@@ -72,13 +76,13 @@ export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
           width: iconSize,
           height: iconSize,
           transform: [
-            { rotateZ: rotation }
+            { rotateZ }
           ]
         }]}
         onTouchEnd={handleTouchEnd}
       >
         {extrasRender({
-          navigation
+          params: params
         })}
       </Animated.View>
     )
@@ -89,7 +93,7 @@ export const MultiBarOverlay: React.FC<Props> = ({ navigation }) => {
       pointerEvents="box-none"
       style={[styles.container, {
         width: surfaceSize,
-        height: surfaceSizeHalf * (surfaceSize / overlayRadius / 2)
+        height: overlayHeight
       }]}
     >
       {itemsList}
