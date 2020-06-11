@@ -35,5 +35,8 @@
   "peerDependencies": {
     "react": "~16.9.0",
     "react-native": "^0.60.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
