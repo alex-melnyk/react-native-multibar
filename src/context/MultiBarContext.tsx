@@ -1,44 +1,30 @@
 import * as React from 'react';
-
-export type MultiBarPassThroughParams = {
-  params?: any;
-};
-
-export type MultiBarExtrasRender = (props: MultiBarPassThroughParams) => React.ReactNode;
-
-export type MultiBarContextProps = {
-  data: MultiBarExtrasRender[];
-  extrasVisible: boolean;
-  iconSize: number;
-  overlayRadius: number;
-  setExtrasVisible: (visible: boolean) => void;
-};
+import { MultiBarContextProps, MultiBarOverlayProps } from '../types';
 
 export const MultiBarContext = React.createContext<MultiBarContextProps>({} as MultiBarContextProps);
 
 type Props = Pick<MultiBarContextProps, 'data'> & {
-  iconSize?: number;
   initialExtrasVisible?: boolean;
-  overlayRadius?: number;
+  overlayProps?: MultiBarOverlayProps;
 };
 
 export const MultiBarProvider: React.FC<Props> = ({
   children,
   data,
-  iconSize = 30,
   initialExtrasVisible = false,
-  overlayRadius = 80
+  overlayProps
 }) => {
   const [extrasVisible, setExtrasVisible] = React.useState(initialExtrasVisible);
 
   return (
-    <MultiBarContext.Provider value={{
-      data,
-      extrasVisible,
-      iconSize,
-      overlayRadius,
-      setExtrasVisible
-    }}>
+    <MultiBarContext.Provider
+      value={{
+        data,
+        extrasVisible,
+        setExtrasVisible,
+        overlayProps
+      }}
+    >
       {children}
     </MultiBarContext.Provider>
   );

@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { MultiBarOverlay } from '../MultiBarOverlay';
 import { styles } from './Styles';
-import { MultiBarPassThroughParams } from '../../context';
+import { MultiBarPassThroughParams } from '../../types';
 
 type Props = Pick<MultiBarPassThroughParams, 'params'>;
 

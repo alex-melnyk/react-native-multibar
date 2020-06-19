@@ -1,27 +1,13 @@
-# React Native MultiBar
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialIcons } from '@expo/vector-icons';
+import { BottomTabBarWrapper, MultiBarButton, MultiBarProvider } from 'react-native-multibar';
 
-> This module provides the functionality to implement extended actions by adding a custom tab bar with an advanced button.
+import { TouchIcon } from './src/components';
+import { BlankScreen } from './src/screens';
 
-[![NPM Version][npm-image]][npm-url]
-
-![Preview](./PREVIEW.gif?raw=true "Preview")
-
-## Example
-There is an example how to use the react-native-multibar [Tabber Expo](https://github.com/alex-melnyk/tabber-expo) or [Tabber RN](https://github.com/alex-melnyk/Tabber)
-
-## Install
-
-```bash
-yarn add react-native-multibar
-```
-or
-```bash
-npm i react-native-multibar
-```
-
-## Usage
-
-```javascript
 export default function App() {
   const Tab = React.useRef<ReturnType<typeof createBottomTabNavigator>>(createBottomTabNavigator()).current;
 
@@ -186,11 +172,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-```
-
-## License
-
-[ISC](http://opensource.org/licenses/ISC)
-
-[npm-image]: https://img.shields.io/npm/v/react-native-multibar.svg
-[npm-url]: https://www.npmjs.com/package/react-native-multibar

@@ -1,21 +1,35 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { MultiBarContext, MultiBarPassThroughParams } from '../../context';
+import { MultiBarContext, } from '../../context';
+import { MultiBarOverlayProps, MultiBarPassThroughParams } from '../../types';
 import { styles } from './Styles';
 
 const COMMON_DEGREES = 180;
 
 type Props = Pick<MultiBarPassThroughParams, 'params'>;
 
-export const MultiBarOverlay: React.FC<Props> = ({ params }) => {
+export const MultiBarOverlay: React.FC<Props> = ({
+  params
+}) => {
   const {
     data,
     extrasVisible,
-    iconSize,
-    overlayRadius,
+    overlayProps,
     setExtrasVisible
   } = React.useContext(MultiBarContext);
+
+  const {
+    expandingMode,
+    iconSize,
+    overlayRadius
+  } = React.useMemo<Required<MultiBarOverlayProps>>(() => {
+    return Object.assign<Required<MultiBarOverlayProps>, MultiBarOverlayProps>({
+      expandingMode: 'staging',
+      iconSize: 30,
+      overlayRadius: 80
+    }, overlayProps || {});
+  }, [overlayProps]);
 
   const iconSizeHalf = React.useMemo(() => iconSize / 2, [iconSize]);
   const surfaceSize = React.useMemo(() => (overlayRadius * 2) + iconSize, [iconSize, overlayRadius]);
@@ -27,19 +41,20 @@ export const MultiBarOverlay: React.FC<Props> = ({ params }) => {
   }, [surfaceSizeHalf, surfaceSize, overlayRadius]);
 
   React.useEffect(() => {
-    const animate = Animated.spring || Animated.timing;
+    const animate = Animated.spring;
 
     const animationsList = animations.map((anim, idx) => animate(anim, {
       toValue: extrasVisible ? 1 : 0,
-      delay: idx * 150,
       useNativeDriver: false
     }));
 
-    const animation = Animated.parallel(animationsList);
+    const animator = expandingMode === 'staging'
+      ? Animated.stagger(100, animationsList)
+      : Animated.parallel(animationsList);
 
-    animation.start();
+    animator.start();
 
-    return () => animation.stop();
+    return () => animator.stop();
   }, [extrasVisible]);
 
   const itemsList = React.useMemo(() => data.map((extrasRender, idx) => {
