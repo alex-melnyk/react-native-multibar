@@ -69,6 +69,11 @@ export const MultiBarOverlay: React.FC<Props> = ({ params }) => {
     setExtrasVisible(false);
   }, [data]);
 
+  // close it when the bottom tab bar is close
+  React.useEffect(() => {
+    setExtrasVisible(extrasVisible && !extrasVisible);
+  }, [params]);
+
   const itemsList = React.useMemo(
     () =>
       data.map((extrasRender, idx) => {
