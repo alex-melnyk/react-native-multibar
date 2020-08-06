@@ -5,12 +5,14 @@ import { MultiBarContext } from '../../context';
 import { styles } from './Styles';
 
 type Props = {
+  rotationDegrees?: number;
   style?: StyleProp<ViewStyle>;
   onPress?: () => boolean | void;
 };
 
 export const MultiBarButton: React.FC<Props> = ({
   children,
+  rotationDegrees,
   style,
   onPress
 }) => {
@@ -20,7 +22,7 @@ export const MultiBarButton: React.FC<Props> = ({
   React.useEffect(() => {
     const animation = Animated.spring(animated, {
       toValue: extrasVisible ? 1 : 0,
-      useNativeDriver: false
+      useNativeDriver: true
     });
 
     animation.start();
@@ -36,7 +38,7 @@ export const MultiBarButton: React.FC<Props> = ({
 
   const rotateZ = animated.interpolate({
     inputRange: [0, 1],
-    outputRange: ['0deg', '180deg']
+    outputRange: ['0deg', `${rotationDegrees ?? 180}deg`]
   });
 
   return (
