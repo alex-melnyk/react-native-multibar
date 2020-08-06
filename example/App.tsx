@@ -122,6 +122,7 @@ export default function App() {
               tabBarLabel: '',
               tabBarButton: () => (
                 <MultiBarButton
+                  rotationDegrees={135}
                   style={{
                     backgroundColor: '#E24E1B'
                   }}

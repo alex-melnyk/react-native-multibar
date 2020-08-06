@@ -1,5 +1,5 @@
-import React, { useMemo, useContext } from 'react';
-import { FlatList, SafeAreaView, TouchableOpacity, View, Text } from 'react-native';
+import React, { useContext, useMemo } from 'react';
+import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { MultiBarContext } from 'react-native-multibar';
 
 const randomColor = () =>
@@ -69,7 +69,7 @@ export const DemoScreen: React.FC = () => {
           </Text>
         </View>
       </View>
-      <View style={{ height: 20 }} />
+      <View style={{ height: 20 }}/>
       <FlatList
         data={cards}
         renderItem={({ item, index }) => (
