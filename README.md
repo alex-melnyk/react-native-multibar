@@ -101,7 +101,7 @@ export default function App() {
         >
           <Tab.Screen
             name="Home"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
@@ -116,7 +116,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Likes"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
@@ -131,7 +131,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Center"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarLabel: '',
               tabBarButton: () => (
@@ -153,7 +153,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Posts"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
@@ -168,7 +168,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Settings"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons

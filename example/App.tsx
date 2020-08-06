@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { BottomTabBarWrapper, MultiBarButton, MultiBarProvider } from 'react-native-multibar';
 
 import { TouchIcon } from './src/components';
-import { BlankScreen } from './src/screens';
+import { DemoScreen } from './src/screens';
 
 export default function App() {
   const Tab = React.useRef<ReturnType<typeof createBottomTabNavigator>>(createBottomTabNavigator()).current;
@@ -87,7 +87,7 @@ export default function App() {
         >
           <Tab.Screen
             name="Home"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
@@ -102,7 +102,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Likes"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
@@ -117,7 +117,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Center"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarLabel: '',
               tabBarButton: () => (
@@ -139,7 +139,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Posts"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
@@ -154,7 +154,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Settings"
-            component={BlankScreen}
+            component={DemoScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
