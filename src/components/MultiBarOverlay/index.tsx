@@ -79,7 +79,7 @@ export const MultiBarOverlay: React.FC<Props> = ({
 
     const rotateZ = animations[idx].interpolate({
       inputRange: [0, 1],
-      outputRange: [90, 0]
+      outputRange: ['90deg', '0deg']
     });
 
     return (
