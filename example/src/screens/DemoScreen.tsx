@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, SafeAreaView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { MultiBarContext } from 'react-native-multibar';
 
 const randomColor = () =>
@@ -15,76 +15,88 @@ export const DemoScreen: React.FC = () => {
   })), []);
 
   return (
-    <SafeAreaView>
-      <View
-        style={{
-          alignItems: 'center'
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            paddingHorizontal: 30,
-            paddingVertical: 10,
-            borderRadius: 10,
-            backgroundColor: toggleButtonColor
-          }}
-          onPress={() => {
-            multiBarContext.setExtrasVisible(!multiBarContext.extrasVisible);
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 12,
-              fontWeight: '600',
-              textTransform: 'uppercase',
-            }}
-          >
-            Toggle Multibar Through Context
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          marginTop: 10,
-          alignItems: 'center'
-        }}
+    <View style={{flex: 1, paddingBottom: 50}}>
+      <StatusBar
+        barStyle="light-content"
+      />
+      <SafeAreaView
+        style={{flex: 1}}
       >
         <View
           style={{
-            paddingHorizontal: 30,
+            width: '100%',
             paddingVertical: 10,
-            borderRadius: 10,
-            backgroundColor: '#D7263D'
           }}
         >
-          <Text
-            style={{
-              fontSize: 12,
-              fontWeight: '600',
-              textTransform: 'uppercase',
-              color: 'white'
-            }}
-          >
-            State: {multiBarContext.extrasVisible ? 'Visible' : 'Hidden'}
-          </Text>
-        </View>
-      </View>
-      <View style={{ height: 20 }}/>
-      <FlatList
-        data={cards}
-        renderItem={({ item, index }) => (
           <View
             style={{
-              marginHorizontal: 10,
-              marginBottom: 10,
-              height: 100,
-              borderRadius: 10,
-              backgroundColor: item.color
+              paddingBottom: 10,
+              alignItems: 'center'
             }}
-          />
-        )}
-        keyExtractor={(v, idx) => `card_item_${idx}`}
-      />
-    </SafeAreaView>
+          >
+            <TouchableOpacity
+              style={{
+                paddingHorizontal: 30,
+                paddingVertical: 10,
+                borderRadius: 10,
+                backgroundColor: '#00AF54'
+              }}
+              onPress={() => {
+                multiBarContext.setExtrasVisible(!multiBarContext.extrasVisible);
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: '600',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Toggle Multibar Through Context
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              alignItems: 'center'
+            }}
+          >
+            <View
+              style={{
+                paddingHorizontal: 30,
+                paddingVertical: 10,
+                borderRadius: 10,
+                backgroundColor: '#D7263D'
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: '600',
+                  textTransform: 'uppercase',
+                  color: 'white'
+                }}
+              >
+                State: {multiBarContext.extrasVisible ? 'Visible' : 'Hidden'}
+              </Text>
+            </View>
+          </View>
+        </View>
+        <FlatList
+          data={cards}
+          keyExtractor={(v, idx) => `card_item_${idx}`}
+          renderItem={({ item, index }) => (
+            <View
+              style={{
+                margin: 10,
+                height: 100,
+                borderRadius: 10,
+                backgroundColor: item.color
+              }}
+            />
+          )}
+        />
+      </SafeAreaView>
+    </View>
   );
 }
